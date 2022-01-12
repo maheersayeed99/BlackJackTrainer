@@ -23,7 +23,7 @@ private:
 
 	Deck* deck;
 	int numPlayers;
-	int gameSpeed = 100;						// This sets how fast the cards are drawn
+	int gameSpeed = 750;						// This sets how fast the cards are drawn
 
 	vector<Player*> players;
 	Player* dealer;

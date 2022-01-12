@@ -46,16 +46,10 @@ void Game::dealRound(int mode) {
 		// deal two cards;
 
 		for (Player* nextPlayer : players) {
-			if (nextPlayer == players[0]) {
-				card* newCard = new card(1, 0);
-				nextPlayer->hand->addCardToHand(newCard);
-			}
-			else {
-				card* nextCard = deck->draw();					// pick new card
-				nextPlayer->hand->addCardToHand(nextCard);		// add card to hand of current player
-			}
+			card* nextCard = deck->draw();					// pick new card
+			nextPlayer->hand->addCardToHand(nextCard);		// add card to hand of current player
 			int playerCount = 0;							// current player number
-			
+
 			glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);				// clear screen
 			drawBackground(mode);										
 			for (Player* printPlayer : players) {
@@ -80,17 +74,8 @@ void Game::dealRound(int mode) {
 	
 		
 	}
-
 endFunc: {}
 
-	// BLACKJACK SPLIT TEST
-	/*
-	players[0]->hand->clearHand();
-	card* split1 = new card(0, 1);
-	card* split2 = new card(0, 1);
-	players[0]->hand->addCardToHand(split1);
-	players[0]->hand->addCardToHand(split2);
-	*/
 	// dealers 2 cards
 	card* nextCard = deck->draw();
 	dealer->hand->addCardToHand(nextCard);
@@ -153,7 +138,6 @@ void Game::printGameState(bool countHidden) {
 				nextCardA->printCard();
 				//cout << "\t" << s << endl;
 			}
-			cout << "Player " << n << "splitted total: " << nextPlayer->altHand->getPoints() << endl << endl;
 		}
 		cout <<"Player "<< n << " total: " << nextPlayer->hand->getPoints() << endl << endl;
 		n++;
@@ -577,40 +561,52 @@ void Game::manage() {
 				switch (key) {
 
 				case FSKEY_1:
-					if (currPlayer->hand->finished && currPlayer->splitted)
-						currPlayer->altHand->addCardToHand(deck->draw());
-					else
-						currPlayer->hand->addCardToHand(deck->draw()); // Draw Card (HIT)
-					
-					
-					
+					currPlayer->hand->addCardToHand(deck->draw()); // Draw Card (HIT)
 					printGameState();							   // Show game state
-					
-					
-					if (currPlayer->hand->getPoints() >= 21)
-						currPlayer->hand->finished = true;
-					if (currPlayer->altHand->getPoints() >= 21)
-						currPlayer->altHand->finished = true;
+					if (currPlayer->hand->getPoints() >= 21) {
+						currPlayer->done = true;
+						if (currPlayer->splitted) {
+							///////////// ALTERNATE HAND CHECK INTERIOR ////////////
+							if (currPlayer->splitted && currPlayer->done) {
+								printPlayerPrompt(playerTurn, currPlayer);			// Print player menu
+								while (key != FSKEY_2) {		// move to next player if 2 is inputted (STAND)
 
+									FsPollDevice();
+									key = FsInkey();
+
+									switch (key) {
+
+									case FSKEY_1:
+										currPlayer->altHand->addCardToHand(deck->draw()); // Draw Card (HIT)
+										printGameState();							   // Show game state
+										if (currPlayer->altHand->getPoints() >= 21) {
+											currPlayer->done = true;
+											goto playerDone;
+										}
+										printPlayerPrompt(playerTurn, currPlayer);							// Print player menu
+										break;
+
+
+									case FSKEY_2:							// Move on (STAND)
+										break;
+
+									case FSKEY_M:							// Pressing M opens the menu
+										printMenu();
+										gameMode = 0;
+										goto backMenu;						// Break out of loop
+									}
+								}
+							}
+						}
+						else {
+							goto playerDone;
+						}
+					}
 					printPlayerPrompt(playerTurn, currPlayer);							// Print player menu
 					break;
 
 				case FSKEY_2:							// Move on (STAND)
-					if (currPlayer->splitted && currPlayer->hand->finished && currPlayer->altHand->finished)
-						break;
-					else if (currPlayer->splitted && currPlayer->hand->finished){
-						key = FSKEY_NULL;
-						currPlayer->altHand->finished = true;
-						break;
-					}
-					else if (currPlayer->splitted) {
-						key = FSKEY_NULL;
-						currPlayer->hand->finished = true;
-						break;
-					}
-					else {
-						break;
-					}
+					break;
 
 				case FSKEY_3:
 					if (currPlayer->hand->splittable()) currPlayer->splitHand();
@@ -701,7 +697,9 @@ void Game::manage() {
 		cout << "done" << endl;
 	}
 
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 	else if (gameMode == 2) {												// If Counting Mode							

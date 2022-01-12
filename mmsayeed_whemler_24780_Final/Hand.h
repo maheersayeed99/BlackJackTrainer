@@ -14,7 +14,7 @@ public:
 	int altPoints;							// alternate score if there is an ace
 	int bet;								// ammount of money betted
 	bool lost = false;
-	bool finished = false;
+
 	float angOff = 0;						// angle for turning hand about arc
 
 
