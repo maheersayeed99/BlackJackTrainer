@@ -30,19 +30,19 @@ height = 700
 Frames = 40
 screen = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
-characterbox = pygame.image.load('lookerl1.png')
+characterbox = pygame.image.load('Images/lookerl1.png')
 charx,chary = characterbox.get_size()
 toggle = True
 # ANIMATIONS-----------------------------------------------------------------
-MainLeft = [pygame.image.load('lookerl11.png'),pygame.image.load('lookerl12.png'),pygame.image.load('lookerl13.png'),pygame.image.load('lookerl14.png')]
-MainRight = [pygame.image.load('lookerr11.png'),pygame.image.load('lookerr12.png'),pygame.image.load('lookerr13.png'),pygame.image.load('lookerr14.png')]
-MainUp = [pygame.image.load('lookeru11.png'),pygame.image.load('lookeru12.png'),pygame.image.load('lookeru13.png'),pygame.image.load('lookeru14.png')]
-MainDown = [pygame.image.load('lookerd11.png'),pygame.image.load('lookerd12.png'),pygame.image.load('lookerd13.png'),pygame.image.load('lookerd14.png')]
-ZombLeft = [pygame.image.load('zombl11.png'),pygame.image.load('zombl12.png'),pygame.image.load('zombl13.png'),pygame.image.load('zombl14.png')]
-ZombRight = [pygame.image.load('zombr11.png'),pygame.image.load('zombr12.png'),pygame.image.load('zombr13.png'),pygame.image.load('zombr14.png')]
-ZombUp = [pygame.image.load('zombu11.png'),pygame.image.load('zombu12.png'),pygame.image.load('zombu13.png'),pygame.image.load('zombu14.png')] 
-ZombDown = [pygame.image.load('zombd11.png'),pygame.image.load('zombd12.png'),pygame.image.load('zombd13.png'),pygame.image.load('zombd14.png')]
-AnimHurt = [pygame.image.load('hurt1.png'),pygame.image.load('hurt2.png'),pygame.image.load('hurt3.png'),pygame.image.load('hurt4.png')]
+MainLeft = [pygame.image.load('Images/lookerl11.png'),pygame.image.load('Images/lookerl12.png'),pygame.image.load('Images/lookerl13.png'),pygame.image.load('Images/lookerl14.png')]
+MainRight = [pygame.image.load('Images/lookerr11.png'),pygame.image.load('Images/lookerr12.png'),pygame.image.load('Images/lookerr13.png'),pygame.image.load('Images/lookerr14.png')]
+MainUp = [pygame.image.load('Images/lookeru11.png'),pygame.image.load('Images/lookeru12.png'),pygame.image.load('Images/lookeru13.png'),pygame.image.load('Images/lookeru14.png')]
+MainDown = [pygame.image.load('Images/lookerd11.png'),pygame.image.load('Images/lookerd12.png'),pygame.image.load('Images/lookerd13.png'),pygame.image.load('Images/lookerd14.png')]
+ZombLeft = [pygame.image.load('Images/zombl11.png'),pygame.image.load('Images/zombl12.png'),pygame.image.load('Images/zombl13.png'),pygame.image.load('Images/zombl14.png')]
+ZombRight = [pygame.image.load('Images/zombr11.png'),pygame.image.load('Images/zombr12.png'),pygame.image.load('Images/zombr13.png'),pygame.image.load('Images/zombr14.png')]
+ZombUp = [pygame.image.load('Images/zombu11.png'),pygame.image.load('Images/zombu12.png'),pygame.image.load('Images/zombu13.png'),pygame.image.load('Images/zombu14.png')] 
+ZombDown = [pygame.image.load('Images/zombd11.png'),pygame.image.load('Images/zombd12.png'),pygame.image.load('Images/zombd13.png'),pygame.image.load('Images/zombd14.png')]
+AnimHurt = [pygame.image.load('Images/hurt1.png'),pygame.image.load('Images/hurt2.png'),pygame.image.load('Images/hurt3.png'),pygame.image.load('Images/hurt4.png')]
     
 # TILE CLASS------------------------------------------------------------------
 
@@ -50,7 +50,7 @@ class Tiles(pygame.sprite.Sprite):    #This class creates grasstiles that form a
     def __init__(self,x,y):
         pygame.sprite.Sprite.__init__(self)
         self.x, self.y = x, y
-        self.character = pygame.image.load('grasstile.png')
+        self.character = pygame.image.load('Images/grasstile.png')
         self.width, self.height = self.character.get_size()
         self.rect = pygame.Rect(self.x,self.y,self.width,self.height)
         self.image = pygame.Surface((self.width,self.height),pygame.SRCALPHA)
@@ -72,7 +72,7 @@ class Hero(pygame.sprite.Sprite):
         self.spawn = 50 # Controls the likelihood of new zombie spawn
 
         # Character Dimensions
-        self.character = pygame.image.load('lookerd11.png')
+        self.character = pygame.image.load('Images/lookerd11.png')
         self.width, self.height = self.character.get_size()
         self.x, self.y = x, y
         self.rect = pygame.Rect(self.x,self.y,self.width,self.height)
@@ -213,7 +213,7 @@ class Villain(pygame.sprite.Sprite):
     def __init__(self,x,y):
         pygame.sprite.Sprite.__init__(self)
         #Character Dimensions
-        self.character = pygame.image.load('zombd2.png')
+        self.character = pygame.image.load('Images/zombd2.png')
         self.width, self.height = self.character.get_size()
         self.x, self.y = x, y
         self.rect = pygame.Rect(self.x,self.y,self.width,self.height)
@@ -376,7 +376,7 @@ class Bullet(pygame.sprite.Sprite):
     def __init__(self,x,y):
         pygame.sprite.Sprite.__init__(self)
         # Dimensions
-        self.character = pygame.image.load('bulletr.png')
+        self.character = pygame.image.load('Images/bulletr.png')
         self.width, self.height = self.character.get_size()
         self.x, self.y = x, y
         self.rect = pygame.Rect(self.x,self.y,self.width,self.height)
@@ -408,16 +408,16 @@ class Bullet(pygame.sprite.Sprite):
         if pygame.sprite.spritecollide(self,grup1,False ):
             killBullet(self)
         if self.dirs == [1,0,0,0]:
-            self.character = pygame.image.load('bulletu.png')
+            self.character = pygame.image.load('Images/bulletu.png')
             self.y-=self.v
         elif self.dirs == [0,1,0,0]:
-            self.character = pygame.image.load('bulletd.png') #Controls animation
+            self.character = pygame.image.load('Images/bulletd.png') #Controls animation
             self.y+=self.v
         elif self.dirs == [0,0,1,0]:
-            self.character = pygame.image.load('bulletr.png')
+            self.character = pygame.image.load('Images/bulletr.png')
             self.x-=self.v
         elif self.dirs == [0,0,0,1]:
-            self.character = pygame.image.load('bulletl.png')
+            self.character = pygame.image.load('Images/bulletl.png')
             self.x+=self.v
 
         self.getrect()
@@ -429,21 +429,21 @@ class Obstacle(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         # Dimensions
         if s == 'car':
-            self.character = pygame.image.load('cars.png')
+            self.character = pygame.image.load('Images/cars.png')
         elif s == 'grave1':
-            self.character = pygame.image.load('grave1.png')
+            self.character = pygame.image.load('Images/grave1.png')
         elif s == 'grave2':
-            self.character = pygame.image.load('grave2.png')
+            self.character = pygame.image.load('Images/grave2.png')
         elif s == 'grave3':
-            self.character = pygame.image.load('grave3.png')
+            self.character = pygame.image.load('Images/grave3.png')
         elif s == 'tree':
-            self.character = pygame.image.load('tree.png')
+            self.character = pygame.image.load('Images/tree.png')
         elif s == 'rock':
-            self.character = pygame.image.load('rock.png')
+            self.character = pygame.image.load('Images/rock.png')
         elif s == 'topwall':
-            self.character = pygame.image.load('topwall.png')
+            self.character = pygame.image.load('Images/topwall.png')
         elif s == 'sidewall':
-            self.character = pygame.image.load('sidewall.png')
+            self.character = pygame.image.load('Images/sidewall.png')
 
         self.width, self.height = self.character.get_size()
         self.x, self.y = x, y
@@ -470,9 +470,9 @@ class Powerup(pygame.sprite.Sprite):
         #Character Dimensions
         self.s = s
         if self.s == 'nuke':
-            self.character = pygame.image.load('nuke.png')
+            self.character = pygame.image.load('Images/nuke.png')
         elif self.s == 'insta':
-            self.character = pygame.image.load('insta.png')
+            self.character = pygame.image.load('Images/insta.png')
         self.width, self.height = self.character.get_size()
         self.x, self.y = x, y
         self.rect = pygame.Rect(self.x,self.y,self.width,self.height)
@@ -736,13 +736,13 @@ def UpdateMap(Source,grup1,grup2):
 
 
 def drawOverlay():
-    screen.blit(pygame.image.load('shadow.png'),(0,0))
+    screen.blit(pygame.image.load('Images/shadow.png'),(0,0))
     if MainCh.gunlist[0] == 'pistol':
-        screen.blit(pygame.image.load('pistolbanner.png'),(0,0))    #Picks and draws gun image
+        screen.blit(pygame.image.load('Images/pistolbanner.png'),(0,0))    #Picks and draws gun image
     elif MainCh.gunlist[0] == 'shotgun':
-        screen.blit(pygame.image.load('shotgunbanner.png'),(0,0))
+        screen.blit(pygame.image.load('Images/shotgunbanner.png'),(0,0))
     elif MainCh.gunlist[0] == 'machinegun':
-        screen.blit(pygame.image.load('machinebanner.png'),(0,0))
+        screen.blit(pygame.image.load('Images/machinebanner.png'),(0,0))
     font = pygame.font.SysFont("impact", 30)                        #Picks Font
     text1 = font.render(str(MainCh.bullets), True, (255, 255, 0))
     text2 = font.render(str(MainCh.money), True, (255, 255, 0))     
@@ -767,11 +767,11 @@ def redrawGame(screen):
     if MainCh.hurting:
         animateHurt(MainCh,AnimHurt)  #Red hurt animation
     if MainCh.gameover:
-        screen.blit(pygame.image.load('gameover.png'),(0,0))
+        screen.blit(pygame.image.load('Images/gameover.png'),(0,0))
     if MainCh.start == False:
-        screen.blit(pygame.image.load('startscreen.png'),(0,0))
+        screen.blit(pygame.image.load('Images/startscreen.png'),(0,0))
     if MainCh.instakill:
-        screen.blit(pygame.image.load('indicator.png'),(0,0))
+        screen.blit(pygame.image.load('Images/indicator.png'),(0,0))
     drawOverlay() #Overlay with score and lives
     
     pygame.display.flip()
