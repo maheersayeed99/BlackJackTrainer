@@ -1,4 +1,5 @@
-# Overworld Zombies
+# Overworld Zombies  
+![Depth First Search with 125 X 250 Maze](https://github.com/maheersayeed99/RubiksSolver/blob/main/pictures/Main%20Page.png)  
 ## Description
 This game is called Overworld Zombies. The objective is to survive as long as possible while zombies try to kill you. Zombies attack when they get too close, so shoot them down before they get to you.  
 
