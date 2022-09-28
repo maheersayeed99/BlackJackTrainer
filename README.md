@@ -1,5 +1,7 @@
 # Overworld Zombies  
-![Depth First Search with 125 X 250 Maze](https://github.com/maheersayeed99/OverworldZombies/blob/main/Images/Screen%20Shot%202022-09-27%20at%2011.29.10%20PM.png)
+
+<img src="/Images/Screen Shot 2022-09-27 at 11.29.10 PM.png" alt="Employee data" title="Employee Data title" width = "600"/>
+
 ## Description
 This game is called Overworld Zombies. The objective is to survive as long as possible while zombies try to kill you. Zombies attack when they get too close, so shoot them down before they get to you.  
 
